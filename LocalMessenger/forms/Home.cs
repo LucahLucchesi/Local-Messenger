@@ -19,12 +19,16 @@ namespace LocalMessenger
 
         private void HostBtn_Click(object sender, EventArgs e)
         {
-
+            var hostPage = new HostPage();
+            hostPage.Show();
+            //this.Hide();
         }
 
         private void JoinBtn_Click(object sender, EventArgs e)
         {
-
+            var joinPage = new JoinPage();
+            joinPage.Show();
+            //this.Hide();
         }
     }
 }
