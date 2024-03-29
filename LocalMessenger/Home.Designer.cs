@@ -42,6 +42,7 @@ namespace LocalMessenger
             this.HostBtn.TabIndex = 0;
             this.HostBtn.Text = "Host";
             this.HostBtn.UseVisualStyleBackColor = true;
+            this.HostBtn.Click += new System.EventHandler(this.HostBtn_Click);
             // 
             // JoinBtn
             // 
@@ -51,6 +52,7 @@ namespace LocalMessenger
             this.JoinBtn.TabIndex = 1;
             this.JoinBtn.Text = "Join";
             this.JoinBtn.UseVisualStyleBackColor = true;
+            this.JoinBtn.Click += new System.EventHandler(this.JoinBtn_Click);
             // 
             // TitleLbl
             // 

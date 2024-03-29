@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace LocalMessenger
 {
-    public partial class Home : Form
+    public partial class HostPage : Form
     {
-        public Home()
+        public HostPage()
         {
             InitializeComponent();
-        }
-
-        private void HostBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void JoinBtn_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
