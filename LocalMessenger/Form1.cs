@@ -10,11 +10,30 @@ using System.Windows.Forms;
 
 namespace LocalMessenger
 {
-    public partial class Form1 : Form
+    public partial class Test : Form
     {
-        public Form1()
+        int testNum = 0;
+
+        public Test()
         {
             InitializeComponent();
+        }
+
+        private void updateHeader()
+        {
+            this.Text = "Dynamic Numbers: " + testNum.ToString();
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            ++testNum;
+            updateHeader();
+        }
+
+        private void subBtn_Click(object sender, EventArgs e)
+        {
+            --testNum;
+            updateHeader();
         }
     }
 }
