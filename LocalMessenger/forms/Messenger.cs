@@ -23,7 +23,7 @@ namespace LocalMessenger
             this.userName = userName;
             InitializeComponent();
             userGroupBox.Text = "Users (1/" + roomSize.ToString() + ")";
-            this.Text = this.roomName + "(1/" + roomSize.ToString() + ")";
+            this.Text = this.roomName + " (1/" + roomSize.ToString() + ")";
             usersList.Items.Add(this.userName);
         }
 
