@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static LocalMessenger.Client;
 
 namespace LocalMessenger
 {
@@ -20,7 +21,13 @@ namespace LocalMessenger
         
         private void joinBtn_Click(object sender, EventArgs e)
         {
-            
+            if (ipTextBox.Text != "" && usrNameTextBox.Text != "")
+            {
+                // should be put in a try-catch
+                // upon failure to create a client, do NOT attempt to create messenger form
+                Client client = new Client(ipTextBox.Text, (int)portBox.Value);
+                // create messenger form
+            }
         }
     }
 }
