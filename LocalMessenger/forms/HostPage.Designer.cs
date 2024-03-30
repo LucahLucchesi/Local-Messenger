@@ -123,12 +123,12 @@ namespace LocalMessenger
             // 
             this.PortBox.Location = new System.Drawing.Point(82, 90);
             this.PortBox.Maximum = new decimal(new int[] {
-            65535,
+            49151,
             0,
             0,
             0});
             this.PortBox.Minimum = new decimal(new int[] {
-            49152,
+            8000,
             0,
             0,
             0});
@@ -136,7 +136,7 @@ namespace LocalMessenger
             this.PortBox.Size = new System.Drawing.Size(100, 20);
             this.PortBox.TabIndex = 10;
             this.PortBox.Value = new decimal(new int[] {
-            49152,
+            8000,
             0,
             0,
             0});
