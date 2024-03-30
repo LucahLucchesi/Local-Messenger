@@ -36,10 +36,10 @@ namespace LocalMessenger
             this.roomNameBox = new System.Windows.Forms.TextBox();
             this.usrNameBox = new System.Windows.Forms.TextBox();
             this.hostBtn = new System.Windows.Forms.Button();
-            this.RoomSizeBox = new System.Windows.Forms.NumericUpDown();
-            this.PortBox = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.RoomSizeBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PortBox)).BeginInit();
+            this.roomSizeBox = new System.Windows.Forms.NumericUpDown();
+            this.portBox = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.roomSizeBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.portBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -104,16 +104,16 @@ namespace LocalMessenger
             // 
             // RoomSizeBox
             // 
-            this.RoomSizeBox.Location = new System.Drawing.Point(82, 38);
-            this.RoomSizeBox.Minimum = new decimal(new int[] {
+            this.roomSizeBox.Location = new System.Drawing.Point(82, 38);
+            this.roomSizeBox.Minimum = new decimal(new int[] {
             2,
             0,
             0,
             0});
-            this.RoomSizeBox.Name = "RoomSizeBox";
-            this.RoomSizeBox.Size = new System.Drawing.Size(100, 20);
-            this.RoomSizeBox.TabIndex = 9;
-            this.RoomSizeBox.Value = new decimal(new int[] {
+            this.roomSizeBox.Name = "RoomSizeBox";
+            this.roomSizeBox.Size = new System.Drawing.Size(100, 20);
+            this.roomSizeBox.TabIndex = 9;
+            this.roomSizeBox.Value = new decimal(new int[] {
             2,
             0,
             0,
@@ -121,21 +121,21 @@ namespace LocalMessenger
             // 
             // PortBox
             // 
-            this.PortBox.Location = new System.Drawing.Point(82, 90);
-            this.PortBox.Maximum = new decimal(new int[] {
+            this.portBox.Location = new System.Drawing.Point(82, 90);
+            this.portBox.Maximum = new decimal(new int[] {
             49151,
             0,
             0,
             0});
-            this.PortBox.Minimum = new decimal(new int[] {
+            this.portBox.Minimum = new decimal(new int[] {
             8000,
             0,
             0,
             0});
-            this.PortBox.Name = "PortBox";
-            this.PortBox.Size = new System.Drawing.Size(100, 20);
-            this.PortBox.TabIndex = 10;
-            this.PortBox.Value = new decimal(new int[] {
+            this.portBox.Name = "PortBox";
+            this.portBox.Size = new System.Drawing.Size(100, 20);
+            this.portBox.TabIndex = 10;
+            this.portBox.Value = new decimal(new int[] {
             8000,
             0,
             0,
@@ -146,8 +146,8 @@ namespace LocalMessenger
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(194, 150);
-            this.Controls.Add(this.PortBox);
-            this.Controls.Add(this.RoomSizeBox);
+            this.Controls.Add(this.portBox);
+            this.Controls.Add(this.roomSizeBox);
             this.Controls.Add(this.hostBtn);
             this.Controls.Add(this.usrNameBox);
             this.Controls.Add(this.roomNameBox);
@@ -157,8 +157,8 @@ namespace LocalMessenger
             this.Controls.Add(this.label1);
             this.Name = "HostPage";
             this.Text = "Host";
-            ((System.ComponentModel.ISupportInitialize)(this.RoomSizeBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PortBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.roomSizeBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.portBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,7 +173,7 @@ namespace LocalMessenger
         private System.Windows.Forms.TextBox roomNameBox;
         private System.Windows.Forms.TextBox usrNameBox;
         private System.Windows.Forms.Button hostBtn;
-        private System.Windows.Forms.NumericUpDown RoomSizeBox;
-        private System.Windows.Forms.NumericUpDown PortBox;
+        private System.Windows.Forms.NumericUpDown roomSizeBox;
+        private System.Windows.Forms.NumericUpDown portBox;
     }
 }

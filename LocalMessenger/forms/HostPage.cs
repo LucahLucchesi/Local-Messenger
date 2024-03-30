@@ -20,10 +20,9 @@ namespace LocalMessenger
 
         private void hostBtn_Click(object sender, EventArgs e)
         {
-
             if(roomNameBox.Text != "" && usrNameBox.Text != "")
             {
-                var msgPage = new Messenger(roomNameBox.Text, (int) RoomSizeBox.Value, usrNameBox.Text);
+                var msgPage = new Messenger(roomNameBox.Text, (int) roomSizeBox.Value, usrNameBox.Text);
                 msgPage.Show();
             }
         }
