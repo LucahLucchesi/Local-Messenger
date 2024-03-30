@@ -79,9 +79,7 @@ namespace LocalMessenger
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
+        
         private System.Windows.Forms.Button HostBtn;
         private System.Windows.Forms.Button JoinBtn;
         private System.Windows.Forms.Label TitleLbl;

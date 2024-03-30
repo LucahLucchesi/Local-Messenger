@@ -34,10 +34,12 @@ namespace LocalMessenger
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.roomNameBox = new System.Windows.Forms.TextBox();
-            this.roomSizeBox = new System.Windows.Forms.TextBox();
             this.usrNameBox = new System.Windows.Forms.TextBox();
-            this.portBox = new System.Windows.Forms.TextBox();
             this.hostBtn = new System.Windows.Forms.Button();
+            this.RoomSizeBox = new System.Windows.Forms.NumericUpDown();
+            this.PortBox = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.RoomSizeBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PortBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -83,26 +85,12 @@ namespace LocalMessenger
             this.roomNameBox.Size = new System.Drawing.Size(100, 20);
             this.roomNameBox.TabIndex = 4;
             // 
-            // roomSizeBox
-            // 
-            this.roomSizeBox.Location = new System.Drawing.Point(82, 38);
-            this.roomSizeBox.Name = "roomSizeBox";
-            this.roomSizeBox.Size = new System.Drawing.Size(100, 20);
-            this.roomSizeBox.TabIndex = 5;
-            // 
             // usrNameBox
             // 
             this.usrNameBox.Location = new System.Drawing.Point(82, 64);
             this.usrNameBox.Name = "usrNameBox";
             this.usrNameBox.Size = new System.Drawing.Size(100, 20);
             this.usrNameBox.TabIndex = 6;
-            // 
-            // portBox
-            // 
-            this.portBox.Location = new System.Drawing.Point(82, 90);
-            this.portBox.Name = "portBox";
-            this.portBox.Size = new System.Drawing.Size(100, 20);
-            this.portBox.TabIndex = 7;
             // 
             // hostBtn
             // 
@@ -112,16 +100,56 @@ namespace LocalMessenger
             this.hostBtn.TabIndex = 8;
             this.hostBtn.Text = "Host";
             this.hostBtn.UseVisualStyleBackColor = true;
+            this.hostBtn.Click += new System.EventHandler(this.hostBtn_Click);
+            // 
+            // RoomSizeBox
+            // 
+            this.RoomSizeBox.Location = new System.Drawing.Point(82, 38);
+            this.RoomSizeBox.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.RoomSizeBox.Name = "RoomSizeBox";
+            this.RoomSizeBox.Size = new System.Drawing.Size(100, 20);
+            this.RoomSizeBox.TabIndex = 9;
+            this.RoomSizeBox.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // PortBox
+            // 
+            this.PortBox.Location = new System.Drawing.Point(82, 90);
+            this.PortBox.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.PortBox.Minimum = new decimal(new int[] {
+            49152,
+            0,
+            0,
+            0});
+            this.PortBox.Name = "PortBox";
+            this.PortBox.Size = new System.Drawing.Size(100, 20);
+            this.PortBox.TabIndex = 10;
+            this.PortBox.Value = new decimal(new int[] {
+            49152,
+            0,
+            0,
+            0});
             // 
             // HostPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(194, 150);
+            this.Controls.Add(this.PortBox);
+            this.Controls.Add(this.RoomSizeBox);
             this.Controls.Add(this.hostBtn);
-            this.Controls.Add(this.portBox);
             this.Controls.Add(this.usrNameBox);
-            this.Controls.Add(this.roomSizeBox);
             this.Controls.Add(this.roomNameBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -129,6 +157,8 @@ namespace LocalMessenger
             this.Controls.Add(this.label1);
             this.Name = "HostPage";
             this.Text = "Host";
+            ((System.ComponentModel.ISupportInitialize)(this.RoomSizeBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PortBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,9 +171,9 @@ namespace LocalMessenger
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox roomNameBox;
-        private System.Windows.Forms.TextBox roomSizeBox;
         private System.Windows.Forms.TextBox usrNameBox;
-        private System.Windows.Forms.TextBox portBox;
         private System.Windows.Forms.Button hostBtn;
+        private System.Windows.Forms.NumericUpDown RoomSizeBox;
+        private System.Windows.Forms.NumericUpDown PortBox;
     }
 }

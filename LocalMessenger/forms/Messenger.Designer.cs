@@ -33,6 +33,8 @@ namespace LocalMessenger
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.sendBtn = new System.Windows.Forms.Button();
             this.userGroupBox = new System.Windows.Forms.GroupBox();
+            this.usersList = new System.Windows.Forms.ListBox();
+            this.userGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -60,15 +62,26 @@ namespace LocalMessenger
             this.sendBtn.TabIndex = 2;
             this.sendBtn.Text = "Send";
             this.sendBtn.UseVisualStyleBackColor = true;
+            this.sendBtn.Click += new System.EventHandler(this.sendBtn_Click);
             // 
             // userGroupBox
             // 
+            this.userGroupBox.Controls.Add(this.usersList);
             this.userGroupBox.Location = new System.Drawing.Point(557, 12);
             this.userGroupBox.Name = "userGroupBox";
             this.userGroupBox.Size = new System.Drawing.Size(155, 426);
             this.userGroupBox.TabIndex = 3;
             this.userGroupBox.TabStop = false;
             this.userGroupBox.Text = "Users (0/0)";
+            // 
+            // usersList
+            // 
+            this.usersList.Enabled = false;
+            this.usersList.FormattingEnabled = true;
+            this.usersList.Location = new System.Drawing.Point(6, 19);
+            this.usersList.Name = "usersList";
+            this.usersList.Size = new System.Drawing.Size(143, 394);
+            this.usersList.TabIndex = 0;
             // 
             // Messenger
             // 
@@ -81,6 +94,7 @@ namespace LocalMessenger
             this.Controls.Add(this.textBox1);
             this.Name = "Messenger";
             this.Text = "Lobby Name (0/0)";
+            this.userGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,5 +106,6 @@ namespace LocalMessenger
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button sendBtn;
         private System.Windows.Forms.GroupBox userGroupBox;
+        private System.Windows.Forms.ListBox usersList;
     }
 }
