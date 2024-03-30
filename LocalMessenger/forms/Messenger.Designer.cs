@@ -29,30 +29,31 @@ namespace LocalMessenger
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.chatWindow = new System.Windows.Forms.TextBox();
+            this.msgInputBox = new System.Windows.Forms.TextBox();
             this.sendBtn = new System.Windows.Forms.Button();
             this.userGroupBox = new System.Windows.Forms.GroupBox();
             this.usersList = new System.Windows.Forms.ListBox();
             this.userGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // chatWindow
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(539, 400);
-            this.textBox1.TabIndex = 2;
+            this.chatWindow.AcceptsReturn = true;
+            this.chatWindow.Location = new System.Drawing.Point(12, 12);
+            this.chatWindow.Multiline = true;
+            this.chatWindow.Name = "chatWindow";
+            this.chatWindow.ReadOnly = true;
+            this.chatWindow.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.chatWindow.Size = new System.Drawing.Size(539, 400);
+            this.chatWindow.TabIndex = 2;
             // 
-            // textBox2
+            // msgInputBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 418);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(468, 20);
-            this.textBox2.TabIndex = 0;
+            this.msgInputBox.Location = new System.Drawing.Point(12, 419);
+            this.msgInputBox.Name = "msgInputBox";
+            this.msgInputBox.Size = new System.Drawing.Size(468, 20);
+            this.msgInputBox.TabIndex = 0;
             // 
             // sendBtn
             // 
@@ -91,8 +92,8 @@ namespace LocalMessenger
             this.ClientSize = new System.Drawing.Size(727, 450);
             this.Controls.Add(this.userGroupBox);
             this.Controls.Add(this.sendBtn);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.msgInputBox);
+            this.Controls.Add(this.chatWindow);
             this.Name = "Messenger";
             this.Text = "Lobby Name (0/0)";
             this.userGroupBox.ResumeLayout(false);
@@ -103,8 +104,8 @@ namespace LocalMessenger
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox chatWindow;
+        private System.Windows.Forms.TextBox msgInputBox;
         private System.Windows.Forms.Button sendBtn;
         private System.Windows.Forms.GroupBox userGroupBox;
         private System.Windows.Forms.ListBox usersList;

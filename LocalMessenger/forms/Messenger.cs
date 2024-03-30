@@ -32,6 +32,7 @@ namespace LocalMessenger
             userGroupBox.Text = "Users (1/" + roomSize.ToString() + ")";
             this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;
             usersList.Items.Add(this.userName);
+            serverRef.setBoxRefs(chatWindow, msgInputBox);
         }
 
         public Messenger(String roomName, int roomSize, String userName, String ipAddr, Client clientRef) //Client based constructor
@@ -50,7 +51,7 @@ namespace LocalMessenger
 
         private void sendBtn_Click(object sender, EventArgs e)
         {
-
+            serverRef.sendMsg(userName);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace LocalMessenger
         private IPAddress ipAddress = null;
         private int numLobby = 1;
         private int maxLobby;
+        private TextBox chatBox = null;
+        private TextBox msgInputBox = null;
 
         public Server(int port, int maxLobby)
         {
@@ -97,6 +99,19 @@ namespace LocalMessenger
         public string getIP()
         {
             return ipAddress.ToString();
+        }
+
+        public void sendMsg(String usrName)
+        {
+            String builtMsg = "[" + usrName + "]" + ": " + msgInputBox.Text + "\r\n";
+            chatBox.Text += builtMsg;
+            msgInputBox.Clear();
+        }
+
+        public void setBoxRefs(TextBox chatBox, TextBox msgInputBox) //get references to the textboxes. I'm not sure if this is necessary or if we need both. but they are there.
+        {
+            this.chatBox = chatBox;
+            this.msgInputBox = msgInputBox;
         }
     }
 }

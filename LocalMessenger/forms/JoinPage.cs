@@ -17,9 +17,10 @@ namespace LocalMessenger
             InitializeComponent();
         }
 
+        
         private void joinBtn_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
