@@ -2,20 +2,32 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Windows.Forms;
 
 namespace LocalMessenger
 {
     public class Server
     {
         private TcpListener server;
+        private IPAddress ipAddress = null;
 
-        public Server(string ip, int port)
+        public Server(int port)
         {
-            IPAddress ipAddress = IPAddress.Parse(ip);
-            server = new TcpListener(ipAddress, port);
+            try
+            {
+                ipAddress = getLocalIP();
+            }catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            if (ipAddress != null)
+            {
+                server = new TcpListener(ipAddress, port);
+            }
+            
         }
 
-        public void Start()
+        public void StartServer()
         {
             try
             {
@@ -57,6 +69,23 @@ namespace LocalMessenger
         public void Stop()
         {
             server.Stop();
+        }
+
+        public IPAddress getLocalIP()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip;
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+        public string getIP()
+        {
+            return ipAddress.ToString();
         }
     }
 }
