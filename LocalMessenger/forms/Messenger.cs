@@ -53,5 +53,22 @@ namespace LocalMessenger
         {
             serverRef.sendMsg(userName);
         }
+
+        // handles the messenger form closing
+        // add confirmation window. setting e.cancel to true will prevent the messenger from closing
+        private void Messenger_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            // stop server if the messenger is the host
+            if (serverRef != null)
+            {
+                var closeLobby = MessageBox.Show("Are you sure you want to close the server?", "Exit", MessageBoxButtons.YesNo);
+                if (closeLobby == DialogResult.No) e.Cancel = true;
+                else serverRef.Stop();
+                return;
+            }
+            var leaveLobby = MessageBox.Show("Leave lobby?", "Exit", MessageBoxButtons.YesNo);
+            if (leaveLobby == DialogResult.No) e.Cancel = true;
+        }
     }
 }

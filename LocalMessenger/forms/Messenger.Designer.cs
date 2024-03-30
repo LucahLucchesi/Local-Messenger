@@ -96,6 +96,7 @@ namespace LocalMessenger
             this.Controls.Add(this.chatWindow);
             this.Name = "Messenger";
             this.Text = "Lobby Name (0/0)";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Messenger_FormClosing);
             this.userGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
