@@ -15,15 +15,17 @@ namespace LocalMessenger
         private String roomName;
         private int roomSize;
         private String userName;
+        private String ipAddr;
 
-        public Messenger(String roomName, int roomSize, String userName)
+        public Messenger(String roomName, int roomSize, String userName, String ipAddr)
         {
             this.roomName = roomName;
             this.roomSize = roomSize;
             this.userName = userName;
+            this.ipAddr = ipAddr;
             InitializeComponent();
             userGroupBox.Text = "Users (1/" + roomSize.ToString() + ")";
-            this.Text = this.roomName + " (1/" + roomSize.ToString() + ")";
+            this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;
             usersList.Items.Add(this.userName);
         }
 

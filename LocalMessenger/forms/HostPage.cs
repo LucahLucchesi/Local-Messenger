@@ -27,7 +27,7 @@ namespace LocalMessenger
             {
                 Server server = new Server((int)portBox.Value);
                 //server.StartServer();
-                var msgPage = new Messenger(roomNameBox.Text, (int) roomSizeBox.Value, usrNameBox.Text);
+                var msgPage = new Messenger(roomNameBox.Text, (int) roomSizeBox.Value, usrNameBox.Text, server.getIP());
                 msgPage.Show();
             }
         }
