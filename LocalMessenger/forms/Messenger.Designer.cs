@@ -45,21 +45,21 @@ namespace LocalMessenger
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(539, 400);
-            this.textBox1.TabIndex = 0;
+            this.textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(12, 418);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(468, 20);
-            this.textBox2.TabIndex = 1;
+            this.textBox2.TabIndex = 0;
             // 
             // sendBtn
             // 
             this.sendBtn.Location = new System.Drawing.Point(486, 418);
             this.sendBtn.Name = "sendBtn";
             this.sendBtn.Size = new System.Drawing.Size(65, 20);
-            this.sendBtn.TabIndex = 2;
+            this.sendBtn.TabIndex = 1;
             this.sendBtn.Text = "Send";
             this.sendBtn.UseVisualStyleBackColor = true;
             this.sendBtn.Click += new System.EventHandler(this.sendBtn_Click);
@@ -85,6 +85,7 @@ namespace LocalMessenger
             // 
             // Messenger
             // 
+            this.AcceptButton = this.sendBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(727, 450);

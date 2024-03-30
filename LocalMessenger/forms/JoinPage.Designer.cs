@@ -31,11 +31,12 @@ namespace LocalMessenger
         {
             this.ipLbl = new System.Windows.Forms.Label();
             this.portLbl = new System.Windows.Forms.Label();
-            this.portTextBox = new System.Windows.Forms.TextBox();
             this.ipTextBox = new System.Windows.Forms.TextBox();
             this.joinBtn = new System.Windows.Forms.Button();
             this.usrNameTextBox = new System.Windows.Forms.TextBox();
             this.usrNameLbl = new System.Windows.Forms.Label();
+            this.portBox = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.portBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ipLbl
@@ -55,13 +56,6 @@ namespace LocalMessenger
             this.portLbl.Size = new System.Drawing.Size(32, 13);
             this.portLbl.TabIndex = 1;
             this.portLbl.Text = "Port: ";
-            // 
-            // portTextBox
-            // 
-            this.portTextBox.Location = new System.Drawing.Point(52, 38);
-            this.portTextBox.Name = "portTextBox";
-            this.portTextBox.Size = new System.Drawing.Size(100, 20);
-            this.portTextBox.TabIndex = 2;
             // 
             // ipTextBox
             // 
@@ -96,20 +90,43 @@ namespace LocalMessenger
             this.usrNameLbl.TabIndex = 6;
             this.usrNameLbl.Text = "Name:";
             // 
+            // portBox
+            // 
+            this.portBox.Location = new System.Drawing.Point(52, 38);
+            this.portBox.Maximum = new decimal(new int[] {
+            49151,
+            0,
+            0,
+            0});
+            this.portBox.Minimum = new decimal(new int[] {
+            8000,
+            0,
+            0,
+            0});
+            this.portBox.Name = "portBox";
+            this.portBox.Size = new System.Drawing.Size(100, 20);
+            this.portBox.TabIndex = 7;
+            this.portBox.Value = new decimal(new int[] {
+            8000,
+            0,
+            0,
+            0});
+            // 
             // JoinPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(167, 123);
+            this.Controls.Add(this.portBox);
             this.Controls.Add(this.usrNameLbl);
             this.Controls.Add(this.usrNameTextBox);
             this.Controls.Add(this.joinBtn);
             this.Controls.Add(this.ipTextBox);
-            this.Controls.Add(this.portTextBox);
             this.Controls.Add(this.portLbl);
             this.Controls.Add(this.ipLbl);
             this.Name = "JoinPage";
             this.Text = "Join";
+            ((System.ComponentModel.ISupportInitialize)(this.portBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,10 +136,10 @@ namespace LocalMessenger
 
         private System.Windows.Forms.Label ipLbl;
         private System.Windows.Forms.Label portLbl;
-        private System.Windows.Forms.TextBox portTextBox;
         private System.Windows.Forms.TextBox ipTextBox;
         private System.Windows.Forms.Button joinBtn;
         private System.Windows.Forms.TextBox usrNameTextBox;
         private System.Windows.Forms.Label usrNameLbl;
+        private System.Windows.Forms.NumericUpDown portBox;
     }
 }

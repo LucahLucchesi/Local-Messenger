@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace LocalMessenger
 {
     public partial class Messenger : Form
@@ -16,13 +17,31 @@ namespace LocalMessenger
         private int roomSize;
         private String userName;
         private String ipAddr;
+        private Server serverRef;
+        private Client clientRef; //added constructors for both server and client. one of these will be null.
 
-        public Messenger(String roomName, int roomSize, String userName, String ipAddr)
+        public Messenger(String roomName, int roomSize, String userName, String ipAddr, Server serverRef) //Server based constructor
         {
             this.roomName = roomName;
             this.roomSize = roomSize;
             this.userName = userName;
             this.ipAddr = ipAddr;
+            this.serverRef = serverRef;
+            this.clientRef = null;
+            InitializeComponent();
+            userGroupBox.Text = "Users (1/" + roomSize.ToString() + ")";
+            this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;
+            usersList.Items.Add(this.userName);
+        }
+
+        public Messenger(String roomName, int roomSize, String userName, String ipAddr, Client clientRef) //Client based constructor
+        {
+            this.roomName = roomName;
+            this.roomSize = roomSize;
+            this.userName = userName;
+            this.ipAddr = ipAddr;
+            this.serverRef = null;
+            this.clientRef = clientRef;
             InitializeComponent();
             userGroupBox.Text = "Users (1/" + roomSize.ToString() + ")";
             this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;

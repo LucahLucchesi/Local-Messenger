@@ -12,7 +12,7 @@ namespace LocalMessenger
             client = new TcpClient(serverIP, port);
         }
 
-        public void SendMessage(string message)
+        public void SendMessage(string message) //needs to be async method and needs to be able to send and recieve messages.
         {
             try
             {

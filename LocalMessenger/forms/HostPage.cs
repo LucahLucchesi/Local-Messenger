@@ -9,7 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static LocalMessenger.Client;
+using static LocalMessenger.Server;
 
 namespace LocalMessenger
 {
@@ -25,9 +25,9 @@ namespace LocalMessenger
         {
             if(roomNameBox.Text != "" && usrNameBox.Text != "")
             {
-                Server server = new Server((int)portBox.Value);
+                Server server = new Server((int)portBox.Value, (int)roomSizeBox.Value);
                 //server.StartServer();
-                var msgPage = new Messenger(roomNameBox.Text, (int) roomSizeBox.Value, usrNameBox.Text, server.getIP());
+                var msgPage = new Messenger(roomNameBox.Text, (int) roomSizeBox.Value, usrNameBox.Text, server.getIP(), server);
                 msgPage.Show();
             }
         }
