@@ -60,7 +60,7 @@ namespace LocalMessenger
             }
             else
             {
-                //clientRef.sendMsg();
+                clientRef.sendMsg(builtMsg);
             }
             msgInputBox.Clear();
 
