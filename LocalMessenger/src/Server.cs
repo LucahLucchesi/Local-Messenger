@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -10,8 +13,10 @@ namespace LocalMessenger
     public class Server
     {
         private TcpListener server;
+        private List<TcpClient> clientList = new List<TcpClient>();
+        private List<NetworkStream> connectionList = new List<NetworkStream>();
         private IPAddress ipAddress = null;
-        private int numLobby = 1;
+        private int clientsInLobby = 0;
         private int maxLobby;
         private TextBox chatBox = null;
 
@@ -32,24 +37,22 @@ namespace LocalMessenger
             
         }
 
-        private async void acceptNewClient()
-        {
-            //TODO: if there is room, await new client. when client is accepted, need to pass information to the window and update the people in the room accordingly
-            // probably going to need a global client list and just append the client.
-        }
-
         public async Task StartServer()
         {
             try
             {
                 server.Start();
-                //move this to async method that checks if new clients can be accepted
                 while(true)
                 {
-                    TcpClient client = await server.AcceptTcpClientAsync();
-                    _ = HandleClient(client);
+                    if(clientsInLobby < maxLobby - 1)
+                    {
+                        TcpClient tempClient = await server.AcceptTcpClientAsync();
+                        clientList.Add(tempClient);
+                        _ = HandleClient(tempClient);
+                        clientsInLobby++;
+                    }
                 }
-                    // Accepts a new client connection
+                
                 
             }catch(Exception e)
             {
@@ -62,6 +65,7 @@ namespace LocalMessenger
             try
             {
                 NetworkStream stream = client.GetStream();
+                connectionList.Add(stream);
             
                 byte[] buffer = new byte[1024];
                 int bytesRead;
@@ -105,7 +109,11 @@ namespace LocalMessenger
         public void sendMsg(string msg)
         {
 
-            // send msg to all clients
+            for (int i = 0; i < clientList.Count; ++i)
+            {
+                byte[] data = Encoding.ASCII.GetBytes(msg);
+                connectionList[i].Write(data, 0, data.Length);
+            }
 
         }
         public void setChatBoxRef(TextBox chatBox)
