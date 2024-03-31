@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LocalMessenger
@@ -37,39 +38,47 @@ namespace LocalMessenger
             // probably going to need a global client list and just append the client.
         }
 
-        public void StartServer()
+        public async Task StartServer()
         {
             try
             {
                 server.Start();
                 //move this to async method that checks if new clients can be accepted
-                
+                while(true)
+                {
+                    TcpClient client = await server.AcceptTcpClientAsync();
+                    _ = HandleClient(client);
+                }
                     // Accepts a new client connection
-                TcpClient client = server.AcceptTcpClient();
-                HandleClient(client);
+                
             }catch(Exception e)
             {
                 Console.WriteLine("Error: " + e.Message); //message box this?
             }
         }
 
-        private void HandleClient(TcpClient client) //probably needs to be some sort of asyncronous function that can handle multiple client inputs.
+        private async Task HandleClient(TcpClient client) //probably needs to be some sort of asyncronous function that can handle multiple client inputs.
         {
-            NetworkStream stream = client.GetStream();
-            
-
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-
-            while((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+            try
             {
-                string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                chatBox.Text += message;
+                NetworkStream stream = client.GetStream();
+            
+                byte[] buffer = new byte[1024];
+                int bytesRead;
 
-                sendMsg(message);
+                while((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                     {
+                         string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                         chatBox.Text += message;
+
+                         sendMsg(message);
+                }
+
+            }catch(Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message); //message box this?
             }
-
-            client.Close();
+            
         }
         public void Stop() //this probably needs to send a message to each of the clients saying server closed and disable their input.
         {
