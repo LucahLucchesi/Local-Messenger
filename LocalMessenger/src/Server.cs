@@ -67,11 +67,11 @@ namespace LocalMessenger
                 int bytesRead;
 
                 while((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                     {
-                         string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                         chatBox.Text += message;
+                {
+                    string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                    chatBox.Text += message;
 
-                         sendMsg(message);
+                    sendMsg(message);
                 }
 
             }catch(Exception e)
