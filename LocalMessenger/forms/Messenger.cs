@@ -48,6 +48,7 @@ namespace LocalMessenger
             userGroupBox.Text = "Users (1/" + roomSize.ToString() + ")";
             this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;
             usersList.Items.Add(this.userName);
+            clientRef.setChatBoxRef(chatWindow);
         }
 
         private void sendBtn_Click(object sender, EventArgs e)
