@@ -43,15 +43,11 @@ namespace LocalMessenger
             try
             {
                 server.Start();
-                Console.WriteLine("Server started. Waiting for connections..."); //Change this to write to textArea on the messenger side.
-
-
                 //move this to async method that checks if new clients can be accepted
                 while (true)
                 {
                     // Accepts a new client connection
                     TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine("Client connected");
                     HandleClient(client);
                 }
 
@@ -101,17 +97,11 @@ namespace LocalMessenger
             return ipAddress.ToString();
         }
 
-        public void sendMsg(String usrName)
+        public void sendMsg(string msg)
         {
-            String builtMsg = "[" + usrName + "]" + ": " + msgInputBox.Text + "\r\n";
-            chatBox.Text += builtMsg;
-            msgInputBox.Clear();
-        }
 
-        public void setBoxRefs(TextBox chatBox, TextBox msgInputBox) //get references to the textboxes. I'm not sure if this is necessary or if we need both. but they are there.
-        {
-            this.chatBox = chatBox;
-            this.msgInputBox = msgInputBox;
+            // send msg to all clients
+
         }
     }
 }
