@@ -13,7 +13,6 @@ namespace LocalMessenger
         private int numLobby = 1;
         private int maxLobby;
         private TextBox chatBox = null;
-        private TextBox msgInputBox = null;
 
         public Server(int port, int maxLobby)
         {
@@ -44,13 +43,10 @@ namespace LocalMessenger
             {
                 server.Start();
                 //move this to async method that checks if new clients can be accepted
-                while (true)
-                {
+                
                     // Accepts a new client connection
-                    TcpClient client = server.AcceptTcpClient();
-                    HandleClient(client);
-                }
-
+                TcpClient client = server.AcceptTcpClient();
+                HandleClient(client);
             }catch(Exception e)
             {
                 Console.WriteLine("Error: " + e.Message); //message box this?
@@ -60,6 +56,7 @@ namespace LocalMessenger
         private void HandleClient(TcpClient client) //probably needs to be some sort of asyncronous function that can handle multiple client inputs.
         {
             NetworkStream stream = client.GetStream();
+            
 
             byte[] buffer = new byte[1024];
             int bytesRead;
@@ -67,10 +64,9 @@ namespace LocalMessenger
             while((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
             {
                 string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                Console.WriteLine("Recieved: " + message);
+                chatBox.Text += message;
 
-                byte[] response = Encoding.ASCII.GetBytes("Message received");
-                stream.Write(response, 0, response.Length);
+                sendMsg(message);
             }
 
             client.Close();
@@ -102,6 +98,10 @@ namespace LocalMessenger
 
             // send msg to all clients
 
+        }
+        public void setChatBoxRef(TextBox chatBox)
+        {
+            this.chatBox = chatBox;
         }
     }
 }

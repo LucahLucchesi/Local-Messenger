@@ -51,12 +51,18 @@ namespace LocalMessenger
         private void sendBtn_Click(object sender, EventArgs e)
         {
             String builtMsg = "[" + userName + "]" + ": " + msgInputBox.Text + "\r\n";
-            serverRef.sendMsg(builtMsg);
+            
             if(serverRef != null)
             {
+                serverRef.sendMsg(builtMsg);
                 chatWindow.Text += builtMsg;
             }
+            else
+            {
+                //clientRef.sendMsg();
+            }
             msgInputBox.Clear();
+
         }
 
         // handles the messenger form closing

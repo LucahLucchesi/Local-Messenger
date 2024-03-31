@@ -26,6 +26,8 @@ namespace LocalMessenger
                 // should be put in a try-catch
                 // upon failure to create a client, do NOT attempt to create messenger form
                 Client client = new Client(ipTextBox.Text, (int)portBox.Value);
+                var msgPage = new Messenger("placeholder", 0, usrNameTextBox.Text, ipTextBox.Text, client);
+                msgPage.Show();
                 // create messenger form
             }
         }

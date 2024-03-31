@@ -28,7 +28,7 @@ namespace LocalMessenger
                 // should be put in a try-catch
                 // upon failure to create a server, do NOT attempt to create messenger form
                 Server server = new Server((int)portBox.Value, (int)roomSizeBox.Value);
-                //server.StartServer();
+                server.StartServer();
                 var msgPage = new Messenger(roomNameBox.Text, (int) roomSizeBox.Value, usrNameBox.Text, server.getIP(), server);
                 msgPage.Show();
             }
