@@ -109,7 +109,7 @@ namespace LocalMessenger
         public void sendMsg(string msg)
         {
 
-            for (int i = 0; i < clientList.Count; ++i)
+            for (int i = 0; i < connectionList.Count; ++i)
             {
                 byte[] data = Encoding.ASCII.GetBytes(msg);
                 connectionList[i].Write(data, 0, data.Length);
