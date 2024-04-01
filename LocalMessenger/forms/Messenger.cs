@@ -15,6 +15,7 @@ namespace LocalMessenger
     {
         private String roomName;
         private int roomSize;
+        private int curUsers = 1;
         private String userName;
         private String ipAddr;
         private Server serverRef;
@@ -53,19 +54,32 @@ namespace LocalMessenger
 
         private void sendBtn_Click(object sender, EventArgs e)
         {
+            //Create a message with username attached
             String builtMsg = "[" + userName + "]" + ": " + msgInputBox.Text + "\r\n";
             
-            if(serverRef != null)
+            if(serverRef != null) //if we are the server we want to see our message and send it to all clients
             {
                 serverRef.sendMsg(builtMsg);
                 chatWindow.Text += builtMsg;
             }
-            else
+            else //The client will send the server its message, Message will only appear when server responds with own message.
             {
                 clientRef.sendMsg(builtMsg);
             }
             msgInputBox.Clear();
 
+        }
+
+        public void setCurUsers(int curUsers)
+        {
+            this.curUsers = curUsers;
+            updateHeaders();
+        }
+
+        private void updateHeaders()
+        {
+            this.Text = this.roomName + " (" + curUsers.ToString() +"/" + roomSize.ToString() + "): " + ipAddr;
+            userGroupBox.Text = "Users (" + curUsers.ToString() + "/" + roomSize.ToString() + ")";
         }
 
         // handles the messenger form closing

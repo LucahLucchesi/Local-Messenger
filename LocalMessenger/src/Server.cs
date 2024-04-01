@@ -73,9 +73,9 @@ namespace LocalMessenger
                 while((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    chatBox.Text += message;
+                    chatBox.Text += message; // confirmed that up to this point works
 
-                    sendMsg(message);
+                    sendMsg(message); //Host freezes after implementing this
                 }
 
             }catch(Exception e)
@@ -106,7 +106,7 @@ namespace LocalMessenger
             return ipAddress.ToString();
         }
 
-        public void sendMsg(string msg)
+        public void sendMsg(string msg) //most likely an error in this function
         {
 
             for (int i = 0; i < connectionList.Count; ++i)
