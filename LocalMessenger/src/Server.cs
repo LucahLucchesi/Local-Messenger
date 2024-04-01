@@ -106,15 +106,19 @@ namespace LocalMessenger
             return ipAddress.ToString();
         }
 
-        public void sendMsg(string msg) //most likely an error in this function
+        public void sendMsg(string msg) //most likely an error in this function, changed to foreach maybe worky?
         {
 
-            for (int i = 0; i < connectionList.Count; ++i)
+            //for (int i = 0; i < connectionList.Count; ++i)
+            //{
+            //    byte[] data = Encoding.ASCII.GetBytes(msg);
+            //    connectionList[i].Write(data, 0, data.Length);
+            //}
+            byte[] data = Encoding.ASCII.GetBytes(msg);
+            foreach (NetworkStream stream in connectionList)
             {
-                byte[] data = Encoding.ASCII.GetBytes(msg);
-                connectionList[i].Write(data, 0, data.Length);
+                stream.Write(data, 0, data.Length);
             }
-
         }
         public void setChatBoxRef(TextBox chatBox)
         {
