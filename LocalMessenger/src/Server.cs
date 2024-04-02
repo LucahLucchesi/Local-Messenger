@@ -77,7 +77,6 @@ namespace LocalMessenger
 
                     sendMsg(message); //Host freezes after implementing this
                 }
-
             }catch(Exception e)
             {
                 Console.WriteLine("Error: " + e.Message); //message box this?
@@ -117,7 +116,20 @@ namespace LocalMessenger
             byte[] data = Encoding.ASCII.GetBytes(msg);
             foreach (NetworkStream stream in connectionList)
             {
-                stream.Write(data, 0, data.Length);
+                try
+                {
+                    stream.Write(data, 0, data.Length);
+                }catch(IOException e)
+                {
+                    Console.WriteLine($"IOException: {e.Message}");
+                }
+                catch (ObjectDisposedException e)
+                {
+                    Console.WriteLine($"ObjectDisposedException: {e.Message}");
+                }catch(Exception e)
+                {
+                    Console.WriteLine($"Error: {e.Message}");
+                } 
             }
         }
         public void setChatBoxRef(TextBox chatBox)
