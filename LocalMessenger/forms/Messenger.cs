@@ -59,7 +59,7 @@ namespace LocalMessenger
             
             if(serverRef != null) //if we are the server we want to see our message and send it to all clients
             {
-                serverRef.sendMsg(builtMsg);
+                _ = serverRef.sendMsg(builtMsg);
                 chatWindow.Text += builtMsg;
             }
             else //The client will send the server its message, Message will only appear when server responds with own message.

@@ -75,7 +75,7 @@ namespace LocalMessenger
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
                     chatBox.Text += message; // confirmed that up to this point works
 
-                    sendMsg(message); //Host freezes after implementing this
+                    _ = sendMsg(message); //Host freezes after implementing this
                 }
             }catch(Exception e)
             {
@@ -105,7 +105,7 @@ namespace LocalMessenger
             return ipAddress.ToString();
         }
 
-        public void sendMsg(string msg) //most likely an error in this function, changed to foreach maybe worky?
+        public async Task sendMsg(string msg) //most likely an error in this function, changed to foreach maybe worky?
         {
 
             //for (int i = 0; i < connectionList.Count; ++i)
@@ -118,7 +118,7 @@ namespace LocalMessenger
             {
                 try
                 {
-                    stream.Write(data, 0, data.Length);
+                    await stream.WriteAsync(data, 0, data.Length);
                 }catch(IOException e)
                 {
                     Console.WriteLine($"IOException: {e.Message}");
