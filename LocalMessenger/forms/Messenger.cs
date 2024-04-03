@@ -97,6 +97,7 @@ namespace LocalMessenger
             }
             var leaveLobby = MessageBox.Show("Leave lobby?", "Exit", MessageBoxButtons.YesNo);
             if (leaveLobby == DialogResult.No) e.Cancel = true;
+            else clientRef.Stop();
         }
     }
 }

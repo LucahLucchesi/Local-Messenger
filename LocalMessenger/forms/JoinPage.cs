@@ -23,12 +23,16 @@ namespace LocalMessenger
         {
             if (ipTextBox.Text != "" && usrNameTextBox.Text != "")
             {
-                // should be put in a try-catch
-                // upon failure to create a client, do NOT attempt to create messenger form
-                Client client = new Client(ipTextBox.Text, (int)portBox.Value);
-                var msgPage = new Messenger("placeholder", 0, usrNameTextBox.Text, ipTextBox.Text, client);
-                msgPage.Show();
-                // create messenger form
+                try
+                {
+                    Client client = new Client(ipTextBox.Text, (int)portBox.Value);
+                    var msgPage = new Messenger("placeholder", 0, usrNameTextBox.Text, ipTextBox.Text, client);
+                    msgPage.Show();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

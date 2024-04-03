@@ -13,8 +13,16 @@ namespace LocalMessenger
         private TextBox chatBox;
         public Client(string serverIP, int port)
         {
-            client = new TcpClient(serverIP, port);
-            _ = receiveMessage();
+            try
+            {
+                client = new TcpClient(serverIP, port);
+                _ = receiveMessage();
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            
         }
         public void getServerInfo()
         {
