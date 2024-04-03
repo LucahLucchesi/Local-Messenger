@@ -34,6 +34,7 @@ namespace LocalMessenger
             this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;
             usersList.Items.Add(this.userName);
             this.serverRef.setChatBoxRef(chatWindow);
+            this.serverRef.setWindowRef(this);
             _ = this.serverRef.StartServer();
         }
 

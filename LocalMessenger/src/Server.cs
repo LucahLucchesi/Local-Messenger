@@ -18,6 +18,7 @@ namespace LocalMessenger
         private int clientsInLobby = 0;
         private int maxLobby;
         private TextBox chatBox = null;
+        private Messenger msgWindowRef;
 
         public Server(int port, int maxLobby)
         {
@@ -50,6 +51,7 @@ namespace LocalMessenger
 
                         _ = HandleClient(tempClient);
                         clientsInLobby++;
+                        msgWindowRef.setCurUsers(clientsInLobby + 1);
                     }
                     else
                     {
@@ -79,7 +81,12 @@ namespace LocalMessenger
                     
                     _ = sendMsg(message); //send message async
                 }
-            }catch(Exception e)
+                client.Close();
+                client.GetStream().Close();
+                clientsInLobby--;
+                msgWindowRef.setCurUsers(clientsInLobby + 1);
+            }
+            catch(Exception e)
             {
                 Console.WriteLine("Error: " + e.Message); //message box this?
             }
@@ -90,8 +97,15 @@ namespace LocalMessenger
             _ = sendMsg("Host has closed the lobby.\r\n");
             foreach(TcpClient client in clientList)
             {
-                if(client.GetStream() != null) client.GetStream().Close();
-                if (client != null) client.Close();
+                try
+                {
+                    client.GetStream().Close();
+                    client.Close();
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                
             }
             server.Stop();
         }
@@ -139,6 +153,10 @@ namespace LocalMessenger
         {
             this.chatBox = chatBox;
         }
+        public void setWindowRef(Messenger msgWindow)
+        {
+            this.msgWindowRef = msgWindow;
+        }
 
         private void parseMessage(string msg)
         {
@@ -154,7 +172,7 @@ namespace LocalMessenger
                 /*Commands that need implementation:
                  * # (int) - notifys that an update to the number of people in lobby changed, set to new number
                  * $ (string) - Username, add it to the users list
-                 * ! (string) - Username left, delete user from users list
+                 * ! (string) - Username left, delete user from users list, also should update clientlist to free up slot.
                  * % (int) - Max bobby size, send to new users to initialize lobby information
                  * & (String) - Lobby name, send to new users to initialize lobby information
                 */
