@@ -60,7 +60,7 @@ namespace LocalMessenger
             }
         }
 
-        private async Task HandleClient(TcpClient client) //probably needs to be some sort of asyncronous function that can handle multiple client inputs.
+        private async Task HandleClient(TcpClient client) 
         {
             try
             {
@@ -73,9 +73,13 @@ namespace LocalMessenger
                 while((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    chatBox.Text += message; // confirmed that up to this point works
 
-                    _ = sendMsg(message); //Host freezes after implementing this
+                    if (chatBox.InvokeRequired == true)
+                        chatBox.Invoke((MethodInvoker)delegate { chatBox.Text += message; });
+                    else
+                        chatBox.Text += message;
+
+                    _ = sendMsg(message); //send message async
                 }
             }catch(Exception e)
             {
