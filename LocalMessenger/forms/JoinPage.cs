@@ -23,6 +23,8 @@ namespace LocalMessenger
         {
             if (ipTextBox.Text != "" && usrNameTextBox.Text != "")
             {
+                // catches any exception thrown by the client constructor
+                // if an exception is thrown, the messenger form is not created
                 try
                 {
                     Client client = new Client(ipTextBox.Text, (int)portBox.Value);

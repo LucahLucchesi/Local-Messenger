@@ -14,7 +14,6 @@ namespace LocalMessenger
     {
         private TcpListener server;
         private List<TcpClient> clientList = new List<TcpClient>();
-        private List<NetworkStream> connectionList = new List<NetworkStream>();
         private IPAddress ipAddress = null;
         private int clientsInLobby = 0;
         private int maxLobby;
@@ -48,11 +47,13 @@ namespace LocalMessenger
                     if (clientsInLobby < maxLobby - 1)
                     {
                         clientList.Add(tempClient);
+
                         _ = HandleClient(tempClient);
                         clientsInLobby++;
                     }
                     else
                     {
+                        tempClient.GetStream().Close();
                         tempClient.Close();
                     }
                 }
@@ -68,13 +69,10 @@ namespace LocalMessenger
         {
             try
             {
-                NetworkStream stream = client.GetStream();
-                connectionList.Add(stream);
-            
                 byte[] buffer = new byte[1024];
                 int bytesRead;
 
-                while((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                while((bytesRead = await client.GetStream().ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
@@ -94,6 +92,12 @@ namespace LocalMessenger
         public void Stop() //this probably needs to send a message to each of the clients saying server closed and disable their input.
         {
             server.Stop();
+            // i think it wouldd be like this
+            //foreach(var client in clientList)
+            //{
+            //    client.GetStream().Close();
+            //    client.Close();
+            //}
         }
 
         private IPAddress getLocalIP() //changed to private function, no one needs access to this.
@@ -117,11 +121,11 @@ namespace LocalMessenger
         {
 
             byte[] data = Encoding.ASCII.GetBytes(msg);
-            foreach (NetworkStream stream in connectionList)
+            foreach (TcpClient client in clientList)
             {
                 try
                 {
-                    await stream.WriteAsync(data, 0, data.Length);
+                    await client.GetStream().WriteAsync(data, 0, data.Length);
                 }catch(IOException e)
                 {
                     Console.WriteLine($"IOException: {e.Message}");

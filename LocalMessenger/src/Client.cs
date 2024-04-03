@@ -11,11 +11,15 @@ namespace LocalMessenger
         private TcpClient client;
         private NetworkStream stream;
         private TextBox chatBox;
+        
         public Client(string serverIP, int port)
         {
+            // tries to establish a connection to the server
+            // exception is thrown to JoinPage.cs
             try
             {
                 client = new TcpClient(serverIP, port);
+                stream = client.GetStream();
                 _ = receiveMessage();
             }
             catch(Exception)
@@ -37,7 +41,6 @@ namespace LocalMessenger
         {
             try
             {
-                stream = client.GetStream();
                 byte[] buffer = new byte[1024];
                 int bytesRead;
 
