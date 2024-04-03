@@ -91,13 +91,12 @@ namespace LocalMessenger
         }
         public void Stop() //this probably needs to send a message to each of the clients saying server closed and disable their input.
         {
+            foreach(TcpClient client in clientList)
+            {
+                client.GetStream().Close();
+                client.Close();
+            }
             server.Stop();
-            // i think it wouldd be like this
-            //foreach(var client in clientList)
-            //{
-            //    client.GetStream().Close();
-            //    client.Close();
-            //}
         }
 
         private IPAddress getLocalIP() //changed to private function, no one needs access to this.
