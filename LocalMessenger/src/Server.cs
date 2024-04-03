@@ -17,7 +17,7 @@ namespace LocalMessenger
         private IPAddress ipAddress = null;
         private int clientsInLobby = 0;
         private int maxLobby;
-        private TextBox chatBox = null;
+        private TextBox chatBox = null; //This is redundant now, make a getter or push message to Messenger.
         private Messenger msgWindowRef;
 
         public Server(int port, int maxLobby)
