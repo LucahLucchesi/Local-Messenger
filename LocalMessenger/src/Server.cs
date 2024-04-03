@@ -75,12 +75,8 @@ namespace LocalMessenger
                 while((bytesRead = await client.GetStream().ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-
-                    if (chatBox.InvokeRequired == true)
-                        chatBox.Invoke((MethodInvoker)delegate { chatBox.Text += message; });
-                    else
-                        chatBox.Text += message;
-
+                    parseMessage(message);
+                    
                     _ = sendMsg(message); //send message async
                 }
             }catch(Exception e)
@@ -91,10 +87,11 @@ namespace LocalMessenger
         }
         public void Stop() //this probably needs to send a message to each of the clients saying server closed and disable their input.
         {
+            _ = sendMsg("Host has closed the lobby.\r\n");
             foreach(TcpClient client in clientList)
             {
-                client.GetStream().Close();
-                client.Close();
+                if(client.GetStream() != null) client.GetStream().Close();
+                if (client != null) client.Close();
             }
             server.Stop();
         }
@@ -141,6 +138,27 @@ namespace LocalMessenger
         public void setChatBoxRef(TextBox chatBox)
         {
             this.chatBox = chatBox;
+        }
+
+        private void parseMessage(string msg)
+        {
+            if (msg.StartsWith("["))
+            {
+                if (chatBox.InvokeRequired == true)
+                    chatBox.Invoke((MethodInvoker)delegate { chatBox.Text += msg; });
+                else
+                    chatBox.Text += msg;
+            }
+            else
+            {
+                /*Commands that need implementation:
+                 * # (int) - notifys that an update to the number of people in lobby changed, set to new number
+                 * $ (string) - Username, add it to the users list
+                 * ! (string) - Username left, delete user from users list
+                 * % (int) - Max bobby size, send to new users to initialize lobby information
+                 * & (String) - Lobby name, send to new users to initialize lobby information
+                */
+            }
         }
     }
 }

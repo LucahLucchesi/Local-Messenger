@@ -56,8 +56,9 @@ namespace LocalMessenger
                 Console.WriteLine("Error: " + e.Message); //message box this?
             }
         }
-        public void Stop()
+        public void Stop(string msg)
         {
+            sendMsg(msg);
             stream.Close();
             client.Close();
         }
