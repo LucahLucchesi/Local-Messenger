@@ -44,12 +44,16 @@ namespace LocalMessenger
                 server.Start();
                 while(true)
                 {
-                    if(clientsInLobby < maxLobby - 1)
+                    TcpClient tempClient = await server.AcceptTcpClientAsync();
+                    if (clientsInLobby < maxLobby - 1)
                     {
-                        TcpClient tempClient = await server.AcceptTcpClientAsync();
                         clientList.Add(tempClient);
                         _ = HandleClient(tempClient);
                         clientsInLobby++;
+                    }
+                    else
+                    {
+                        tempClient.Close();
                     }
                 }
                 
