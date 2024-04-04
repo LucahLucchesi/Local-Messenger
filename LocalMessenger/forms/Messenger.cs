@@ -51,6 +51,7 @@ namespace LocalMessenger
             this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;
             usersList.Items.Add(this.userName);
             clientRef.setChatBoxRef(chatWindow);
+            clientRef.setWindowRef(this);
         }
 
         private void sendBtn_Click(object sender, EventArgs e)
@@ -69,6 +70,18 @@ namespace LocalMessenger
             }
             msgInputBox.Clear();
 
+        }
+
+        public void setLobbyName(string newLobbyName)
+        {
+            this.roomName = newLobbyName;
+            updateHeaders();
+        }
+
+        public void setRoomSize(int rmSize)
+        {
+            this.roomSize = rmSize;
+            updateHeaders();
         }
 
         public void setCurUsers(int curUsers)
@@ -99,6 +112,16 @@ namespace LocalMessenger
             var leaveLobby = MessageBox.Show("Leave lobby?", "Exit", MessageBoxButtons.YesNo);
             if (leaveLobby == DialogResult.No) e.Cancel = true;
             else clientRef.Stop("[" + userName + "] has left.\r\n");
+        }
+
+        public void addUser(string newUser)
+        {
+            usersList.Items.Add(newUser);
+        }
+
+        public void removeUser(string remUser)
+        {
+            usersList.Items.Remove(remUser);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace LocalMessenger
         private TcpClient client;
         private NetworkStream stream;
         private TextBox chatBox;
+        private Messenger msgWindowRef;
         
         public Client(string serverIP, int port)
         {
@@ -66,5 +67,57 @@ namespace LocalMessenger
         {
             this.chatBox = chatBox;
         }
+
+        public void setWindowRef(Messenger msgWindow)
+        {
+            this.msgWindowRef = msgWindow;
+        }
+
+        private void parseMessage(string msg)
+        {
+            if (msg.StartsWith("$")) //Contains a new username to be added
+            {
+                msg = msg.Substring(1);
+                msgWindowRef.addUser(msg);
+            }
+            else if (msg.StartsWith("!")) //This user has left
+            {
+                msg = msg.Substring(1);
+                msgWindowRef.removeUser(msg);
+            }
+            else if (msg.StartsWith("#"))
+            {
+                msg = msg.Substring(1);
+                int newCurUsers = int.Parse(msg);
+                msgWindowRef.setCurUsers(newCurUsers);
+            }
+            else if (msg.StartsWith("%"))
+            {
+                msg = msg.Substring(1);
+                int lobbySize = int.Parse(msg);
+                msgWindowRef.setRoomSize(lobbySize);
+            }
+            else if (msg.StartsWith("&"))
+            {
+                msg = msg.Substring(1);
+                msgWindowRef.setLobbyName(msg);
+            }
+            else
+            {
+                if (chatBox.InvokeRequired == true)
+                    chatBox.Invoke((MethodInvoker)delegate { chatBox.Text += msg; });
+                else
+                    chatBox.Text += msg;
+            }
+
+            /*Commands that need implementation:
+                * # (int)c - notifys that an update to the number of people in lobby changed, set to new number
+                * $ (string) - Username, add it to the users list
+                * ! (string) - Username left, delete user from users list, also should update clientlist to free up slot.
+                * % (int)c - Max lobby size, send to new users to initialize lobby information
+                * & (String)c - Lobby name, send to new users to initialize lobby information
+            */
+        }
+
     }
 }

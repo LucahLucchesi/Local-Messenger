@@ -81,10 +81,11 @@ namespace LocalMessenger
                     
                     _ = sendMsg(message); //send message async
                 }
-                client.Close();
-                client.GetStream().Close();
                 clientsInLobby--;
                 msgWindowRef.setCurUsers(clientsInLobby + 1);
+                clientList.Remove(client);
+                client.GetStream().Close();
+                client.Close();
             }
             catch(Exception e)
             {
@@ -160,23 +161,30 @@ namespace LocalMessenger
 
         private void parseMessage(string msg)
         {
-            if (msg.StartsWith("["))
+            if (msg.StartsWith("$")) //Contains a new username to be added
+            {
+                msg = msg.Substring(1);
+                msgWindowRef.addUser(msg);
+            }
+            else if (msg.StartsWith("!")) //This user has left
+            {
+                msg = msg.Substring(1);
+                msgWindowRef.removeUser(msg);
+            }
+            else
             {
                 if (chatBox.InvokeRequired == true)
                     chatBox.Invoke((MethodInvoker)delegate { chatBox.Text += msg; });
                 else
                     chatBox.Text += msg;
             }
-            else
-            {
-                /*Commands that need implementation:
-                 * # (int) - notifys that an update to the number of people in lobby changed, set to new number
-                 * $ (string) - Username, add it to the users list
-                 * ! (string) - Username left, delete user from users list, also should update clientlist to free up slot.
-                 * % (int) - Max bobby size, send to new users to initialize lobby information
-                 * & (String) - Lobby name, send to new users to initialize lobby information
-                */
-            }
+            /*Commands that need implementation:
+                * # (int)c - notifys that an update to the number of people in lobby changed, set to new number
+                * $ (string) - Username, add it to the users list
+                * ! (string) - Username left, delete user from users list, also should update clientlist to free up slot.
+                * % (int)c - Max lobby size, send to new users to initialize lobby information
+                * & (String)c - Lobby name, send to new users to initialize lobby information
+            */
         }
     }
 }
