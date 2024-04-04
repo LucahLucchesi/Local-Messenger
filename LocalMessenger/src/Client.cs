@@ -77,8 +77,8 @@ namespace LocalMessenger
         
         public void Stop(string msg)
         {
-            sendMsg("!" + msgWindowRef.getUserName());
-            sendMsg(msg);
+            sendMsg(msg + "\r\n!" + msgWindowRef.getUserName() + "\r\n");
+            
             stream.Close();
             client.Close();
         }

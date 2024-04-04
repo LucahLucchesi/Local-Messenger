@@ -78,9 +78,12 @@ namespace LocalMessenger
                 while((bytesRead = await client.GetStream().ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    parseMessage(message);
-                    
-                    _ = sendMsg(message); //send message async
+                    string[] msgs = message.Split(Environment.NewLine.ToCharArray());
+                    foreach (string msg in msgs)
+                    {
+                        parseMessage(msg);
+                        _ = sendMsg(msg); //send message async
+                    }
                 }
                 clientsInLobby--;
                 msgWindowRef.setCurUsers(clientsInLobby + 1);
@@ -174,10 +177,10 @@ namespace LocalMessenger
             }
             else
             {
-                if (chatBox.InvokeRequired == true)
-                    chatBox.Invoke((MethodInvoker)delegate { chatBox.Text += msg; });
-                else
-                    chatBox.Text += msg;
+                if (msg.Length > 0)
+                {
+                    chatBox.Text += msg + "\r\n";
+                }
             }
             /*Commands that need implementation:
                 * # (int)c - notifys that an update to the number of people in lobby changed, set to new number
