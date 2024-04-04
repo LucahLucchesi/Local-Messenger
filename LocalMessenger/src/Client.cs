@@ -28,14 +28,17 @@ namespace LocalMessenger
             }
             
         }
-        public void getServerInfo()
-        {
-
-        }
         public void sendMsg(string msg)
         {
+            // sends a message to the server. Will not send if server is closed
             byte[] data = Encoding.ASCII.GetBytes(msg);
-            stream.Write(data, 0, data.Length);
+            try
+            {
+                stream.Write(data, 0, data.Length);
+            }catch(Exception) {
+                MessageBox.Show("Host has shut down the server.");
+            }
+            
         }
         public async Task receiveMessage()
         {
