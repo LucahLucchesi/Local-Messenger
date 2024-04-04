@@ -51,6 +51,7 @@ namespace LocalMessenger
             this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;
             clientRef.setChatBoxRef(chatWindow);
             clientRef.setWindowRef(this);
+            clientRef.sendClientInfo();
         }
 
         private void sendBtn_Click(object sender, EventArgs e)

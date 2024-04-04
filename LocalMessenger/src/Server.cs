@@ -191,19 +191,19 @@ namespace LocalMessenger
         private void sendServerInfo(TcpClient client)
         {
             NetworkStream stream = client.GetStream();
-            directMsg(stream, "#" + (clientsInLobby + 1));
-            directMsg(stream, "%" + maxLobby);
-            directMsg(stream, "&" + msgWindowRef.getLobbyName());
+            _ = directMsg(stream, "#" + (clientsInLobby + 1) + "\r\n");
+            _ = directMsg(stream, "%" + maxLobby + "\r\n");
+            _ = directMsg(stream, "&" + msgWindowRef.getLobbyName() + "\r\n");
             foreach(string user in msgWindowRef.getUsers().Items)
             {
-                directMsg(stream, "$" + user);
+                _ = directMsg(stream, "$" + user + "\r\n");
             } 
         }
 
-        private void directMsg(NetworkStream stream, string msg)
+        private async Task directMsg(NetworkStream stream, string msg)
         {
             byte[] data = Encoding.ASCII.GetBytes(msg);
-            stream.Write(data, 0, data.Length);
+            await stream.WriteAsync(data, 0, data.Length);
         }
     }
 }

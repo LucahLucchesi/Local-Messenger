@@ -22,7 +22,7 @@ namespace LocalMessenger
                 client = new TcpClient(serverIP, port);
                 stream = client.GetStream();
                 _ = receiveMessage();
-                sendClientInfo();
+                
             }
             catch(Exception)
             {
@@ -31,10 +31,10 @@ namespace LocalMessenger
             
         }
 
-        private void sendClientInfo()
+        public void sendClientInfo()
         {
             while(msgWindowRef == null) { }
-            sendMsg("$" + msgWindowRef.getUserName());
+            sendMsg("$" + msgWindowRef.getUserName() + "\r\n");
         }
 
         public void sendMsg(string msg)
@@ -60,7 +60,11 @@ namespace LocalMessenger
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    parseMessage(message);
+                    string[] msgs = message.Split(Environment.NewLine.ToCharArray());
+                    foreach(string msg in msgs)
+                    {
+                        parseMessage(msg);
+                    }
                 }
 
             }
@@ -119,10 +123,11 @@ namespace LocalMessenger
             }
             else
             {
-                if (chatBox.InvokeRequired == true)
-                    chatBox.Invoke((MethodInvoker)delegate { chatBox.Text += msg; });
-                else
-                    chatBox.Text += msg;
+                if(msg.Length > 0)
+                {
+                    chatBox.Text += msg + "\r\n";
+                }
+                
             }
 
             /*Commands that need implementation:
