@@ -102,7 +102,7 @@ namespace LocalMessenger
             this.hostBtn.UseVisualStyleBackColor = true;
             this.hostBtn.Click += new System.EventHandler(this.hostBtn_Click);
             // 
-            // RoomSizeBox
+            // roomSizeBox
             // 
             this.roomSizeBox.Location = new System.Drawing.Point(82, 38);
             this.roomSizeBox.Minimum = new decimal(new int[] {
@@ -110,7 +110,7 @@ namespace LocalMessenger
             0,
             0,
             0});
-            this.roomSizeBox.Name = "RoomSizeBox";
+            this.roomSizeBox.Name = "roomSizeBox";
             this.roomSizeBox.Size = new System.Drawing.Size(100, 20);
             this.roomSizeBox.TabIndex = 9;
             this.roomSizeBox.Value = new decimal(new int[] {
@@ -119,7 +119,7 @@ namespace LocalMessenger
             0,
             0});
             // 
-            // PortBox
+            // portBox
             // 
             this.portBox.Location = new System.Drawing.Point(82, 90);
             this.portBox.Maximum = new decimal(new int[] {
@@ -132,7 +132,7 @@ namespace LocalMessenger
             0,
             0,
             0});
-            this.portBox.Name = "PortBox";
+            this.portBox.Name = "portBox";
             this.portBox.Size = new System.Drawing.Size(100, 20);
             this.portBox.TabIndex = 10;
             this.portBox.Value = new decimal(new int[] {
@@ -145,7 +145,7 @@ namespace LocalMessenger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(194, 150);
+            this.ClientSize = new System.Drawing.Size(194, 151);
             this.Controls.Add(this.portBox);
             this.Controls.Add(this.roomSizeBox);
             this.Controls.Add(this.hostBtn);
