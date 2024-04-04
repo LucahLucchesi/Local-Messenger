@@ -33,6 +33,7 @@ namespace LocalMessenger
 
         private void sendClientInfo()
         {
+            while(msgWindowRef == null) { }
             sendMsg("$" + msgWindowRef.getUserName());
         }
 
@@ -52,6 +53,7 @@ namespace LocalMessenger
         {
             try
             {
+                
                 byte[] buffer = new byte[1024];
                 int bytesRead;
 
@@ -67,6 +69,8 @@ namespace LocalMessenger
                 Console.WriteLine("Error: " + e.Message); //message box this?
             }
         }
+
+        
         public void Stop(string msg)
         {
             sendMsg("!" + msgWindowRef.getUserName());
