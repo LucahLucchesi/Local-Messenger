@@ -52,6 +52,7 @@ namespace LocalMessenger
                         _ = HandleClient(tempClient);
                         clientsInLobby++;
                         msgWindowRef.setCurUsers(clientsInLobby + 1);
+                        sendServerInfo(tempClient);
                     }
                     else
                     {
@@ -185,6 +186,24 @@ namespace LocalMessenger
                 * % (int)c - Max lobby size, send to new users to initialize lobby information
                 * & (String)c - Lobby name, send to new users to initialize lobby information
             */
+        }
+
+        private void sendServerInfo(TcpClient client)
+        {
+            NetworkStream stream = client.GetStream();
+            directMsg(stream, "#" + (clientsInLobby + 1));
+            directMsg(stream, "%" + maxLobby);
+            directMsg(stream, "&" + msgWindowRef.getLobbyName());
+            foreach(string user in msgWindowRef.getUsers().Items)
+            {
+                directMsg(stream, "$" + user);
+            } 
+        }
+
+        private void directMsg(NetworkStream stream, string msg)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(msg);
+            stream.Write(data, 0, data.Length);
         }
     }
 }

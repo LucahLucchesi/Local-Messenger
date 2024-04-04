@@ -49,7 +49,6 @@ namespace LocalMessenger
             InitializeComponent();
             userGroupBox.Text = "Users (1/" + roomSize.ToString() + ")";
             this.Text = this.roomName + " (1/" + roomSize.ToString() + "): " + ipAddr;
-            usersList.Items.Add(this.userName);
             clientRef.setChatBoxRef(chatWindow);
             clientRef.setWindowRef(this);
         }
@@ -122,6 +121,21 @@ namespace LocalMessenger
         public void removeUser(string remUser)
         {
             usersList.Items.Remove(remUser);
+        }
+
+        public string getLobbyName()
+        {
+            return roomName;
+        }
+
+        public ListBox getUsers()
+        {
+            return usersList;
+        }
+
+        public string getUserName()
+        {
+            return userName;
         }
     }
 }

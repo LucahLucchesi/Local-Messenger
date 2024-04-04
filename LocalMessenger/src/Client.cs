@@ -29,6 +29,12 @@ namespace LocalMessenger
             }
             
         }
+
+        private void sendClientInfo()
+        {
+            sendMsg("$" + msgWindowRef.getUserName());
+        }
+
         public void sendMsg(string msg)
         {
             // sends a message to the server. Will not send if server is closed
@@ -62,6 +68,7 @@ namespace LocalMessenger
         }
         public void Stop(string msg)
         {
+            sendMsg("!" + msgWindowRef.getUserName());
             sendMsg(msg);
             stream.Close();
             client.Close();
