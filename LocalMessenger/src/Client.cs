@@ -22,6 +22,7 @@ namespace LocalMessenger
                 client = new TcpClient(serverIP, port);
                 stream = client.GetStream();
                 _ = receiveMessage();
+                sendClientInfo();
             }
             catch(Exception)
             {
@@ -57,7 +58,7 @@ namespace LocalMessenger
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    chatBox.Text += message;
+                    parseMessage(message);
                 }
 
             }
